@@ -23,7 +23,7 @@ public class Student {
 	private int finalScore;
 	private String finalGrade;
 	
-	// Student Constructor
+	// Constructors
 	public Student(Builder builder) {
 		id = builder.id;
 		firstName = builder.firstName;
@@ -39,6 +39,25 @@ public class Student {
 		assignment5 = builder.assignment5;
 		finalScore = builder.finalScore;
 		finalGrade = builder.finalGrade;
+	}
+	
+	public Student(int id, String firstName, String lastName, String dob, String emailAddress, int midterm1,
+			int midterm2, int assignment1, int assignment2, int assignment3, int assignment4, int assignment5,
+			int finalScore, String finalGrade) {
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.dob = dob;
+		this.emailAddress = emailAddress;
+		this.midterm1 = midterm1;
+		this.midterm2 = midterm2;
+		this.assignment1 = assignment1;
+		this.assignment2 = assignment2;
+		this.assignment3 = assignment3;
+		this.assignment4 = assignment4;
+		this.assignment5 = assignment5;
+		this.finalScore = finalScore;
+		this.finalGrade = finalGrade;
 	}
 	
 	/**
