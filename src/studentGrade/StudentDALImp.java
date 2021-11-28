@@ -112,25 +112,23 @@ public class StudentDALImp implements StudentDAL {
 	}
 
 	@Override
-	public void updateStudent(int id, String firstName, String lastName, String dob, String emailAddress, int midterm1,
-			int midterm2, int assignment1, int assignment2, int assignment3, int assignment4, int assignment5,
-			int finalScore, String finalGrade) {
+	public void updateStudent(Student student) {
 		try( Connection con = DriverManager.getConnection( URL, USER, PASS);
 				PreparedStatement statement = con.prepareStatement( SQL_UPDATE)){
-			statement.setInt( 1, id);
-			statement.setString( 2, firstName);
-			statement.setString( 3, lastName);
-			statement.setString( 4, dob);
-			statement.setString( 5, emailAddress);
-			statement.setInt( 6, midterm1);
-			statement.setInt( 7, midterm2);
-			statement.setInt( 8, assignment1);
-			statement.setInt( 9, assignment2);
-			statement.setInt( 10, assignment3);
-			statement.setInt( 11, assignment4);
-			statement.setInt( 12, assignment5);
-			statement.setInt( 13, finalScore);
-			statement.setString( 14, finalGrade);
+			statement.setInt( 1, student.getId());
+			statement.setString( 2, student.getFirstName());
+			statement.setString( 3, student.getLastName());
+			statement.setString( 4, student.getDob());
+			statement.setString( 5, student.getEmailAddress());
+			statement.setInt( 6, student.getMidterm1());
+			statement.setInt( 7, student.getMidterm2());
+			statement.setInt( 8, student.getAssignment1());
+			statement.setInt( 9, student.getAssignment2());
+			statement.setInt( 10, student.getAssignment3());
+			statement.setInt( 11, student.getAssignment4());
+			statement.setInt( 12, student.getAssignment5());
+			statement.setInt( 13, student.getFinalScore());
+			statement.setString( 14, student.getFinalGrade());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
