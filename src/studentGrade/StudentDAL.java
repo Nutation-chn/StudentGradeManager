@@ -1,6 +1,5 @@
 package studentGrade;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface StudentDAL {
