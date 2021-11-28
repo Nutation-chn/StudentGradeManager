@@ -14,7 +14,9 @@ public class StudentDALImp implements StudentDAL {
 	private static final String URL = "jdbc:mysql://localhost:3306/books";
 	private static final String USER = "Group10";
 	private static final String PASS = "8288";
-	private static final String SQL_GET_ALL = "select * from books.authors";
+	
+	// These SQL need to be redefined
+	private static final String SQL_GET_ALL = "select * from books.authors";         
 	private static final String SQL_GET_WITH_ID = "select * from books.authors where AuthorID=?";
 	private static final String SQL_INSERT = "insert into books.authors (FirstName, LastName) values (?,?);";
 	private static final String SQL_UPDATE = "update books.authors set FirstName = ?  where id=?";
