@@ -90,8 +90,8 @@ public class StudentDALImp implements StudentDAL {
 	public boolean add(Student student) {
 		try( Connection con = DriverManager.getConnection( URL, USER, PASS);
 				PreparedStatement statement = con.prepareStatement( SQL_INSERT)){
-					
-			statement.setInt( 1, student.getId());
+			
+			//database set id auto incremental, insert sql remove id. //zd 20210.12.01
 			statement.setString( 2, student.getFirstName());
 			statement.setString( 3, student.getLastName());
 			statement.setString( 4, student.getDob());
@@ -110,11 +110,12 @@ public class StudentDALImp implements StudentDAL {
 		}catch( SQLException e){
 			e.printStackTrace();
 		}
-		return false;
+		return ; //todo return if successful zd
 	}
 
 	@Override
-	public void updateStudent(Student student) {
+	//todo return if successful zd
+	public boolean updateStudent(Student student) {
 		try( Connection con = DriverManager.getConnection( URL, USER, PASS);
 				PreparedStatement statement = con.prepareStatement( SQL_UPDATE)){
 			statement.setInt( 1, student.getId());
@@ -138,7 +139,8 @@ public class StudentDALImp implements StudentDAL {
 	}
 
 	@Override
-	public void deleteStudent(int id) {
+	//todo return if successful zd
+	public boolean deleteStudent(int id) {
 		try( Connection con = DriverManager.getConnection( URL, USER, PASS);
 				PreparedStatement statement = con.prepareStatement( SQL_DELETE)){
 			statement.setInt( 1, id);

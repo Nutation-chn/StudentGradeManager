@@ -17,7 +17,7 @@ GRANT ALL ON `StudentDB`.* TO 'cst8288'@'localhost';
 -- Table `StudentDB`.`StudentRecord`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `StudentDB`.`StudentRecord` (
-  `ID` INT NOT NULL,
+  `ID` INT NOT NULL auto_increment,
   `FirstName` NVARCHAR(100) NOT NULL,
   `LastName` NVARCHAR(100) NOT NULL,
   `DateOfBirth` DATE NOT NULL,
@@ -37,5 +37,5 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Insert to table `StudentDB`.`StudentRecord`
 -- -----------------------------------------------------
-INSERT INTO `StudentDB`.`StudentRecord` (`ID`, `FirstName`, `LastName`, `DateOfBirth`, `EmailAddress`, `Midterm1Score`, `Midterm2Score`, `Assignment1Score`, `Assignment2Score`, `Assignment3Score`, `Assignment4Score`, `Assignment5Score`) 
-	VALUES ('1', 'James', 'Milner', '1986-01-04', 'james01milner@gmail.com', '77', '88', '81', '92', '96', '84', '77');
+INSERT INTO `StudentDB`.`StudentRecord` (`FirstName`, `LastName`, `DateOfBirth`, `EmailAddress`, `Midterm1Score`, `Midterm2Score`, `Assignment1Score`, `Assignment2Score`, `Assignment3Score`, `Assignment4Score`, `Assignment5Score`) 
+	VALUES ( 'James', 'Milner', '1986-01-04', 'james01milner@gmail.com', '77', '88', '81', '92', '96', '84', '77');

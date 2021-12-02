@@ -66,7 +66,7 @@ public class Student {
 	 *
 	 */
 	public static class Builder{
-		private final int id;
+		private int id;
 		private String firstName;
 		private String lastName;
 		private String dob;
@@ -80,7 +80,9 @@ public class Student {
 		private int assignment5;
 		private int finalScore;
 		private String finalGrade;
-		
+		public Builder() {
+			
+		}
 		public Builder(int id) {
 			this.id = id;
 		}
@@ -150,7 +152,7 @@ public class Student {
 			return this;
 		}
 		
-		public Student getStudent() {
+		public Student build() {
 			return new Student(this);
 		}
 	}
