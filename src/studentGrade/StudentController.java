@@ -46,7 +46,7 @@ public class StudentController {
 		
 	}
 	
-	public void getStatics() {
+	public void getStatistics() {
 		List<Student> studentList=studentDAL.getAll();
 		int studentCount=studentList.size();
 		int averageMid1=0, averageMid2=0, averageA1=0, averageA2=0, averageA3=0, averageA4=0, averageA5=0;
