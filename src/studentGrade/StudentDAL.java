@@ -12,6 +12,7 @@ public interface StudentDAL {
 	List<Student> getAll();
 	Student getStudent( int id);
 	boolean add(Student student);
-	void updateStudent(Student student);
-	void deleteStudent(int id);
+	boolean updateStudent(int id, String column, String string);
+	boolean updateStudent(int id, String column, int integer);
+	boolean deleteStudent(int id);
 }
