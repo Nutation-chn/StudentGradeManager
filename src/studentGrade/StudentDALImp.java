@@ -11,16 +11,15 @@ import java.util.List;
 
 public class StudentDALImp implements StudentDAL {
 	
-	private static final String URL = "jdbc:mysql://localhost:3306/books";
-	private static final String USER = "Group10";
+	private static final String URL = "jdbc:mysql://localhost:3306/StudentDB";
+	private static final String USER = "cst8288";
 	private static final String PASS = "8288";
 	
-	// These SQL need to be redefined
-	private static final String SQL_GET_ALL = "select * from books.authors";         
-	private static final String SQL_GET_WITH_ID = "select * from books.authors where AuthorID=?";
-	private static final String SQL_INSERT = "insert into books.authors (FirstName, LastName) values (?,?);";
-	private static final String SQL_UPDATE = "update books.authors set FirstName = ?  where id=?";
-	private static final String SQL_DELETE = "delete from books.authors where id=?";
+	private static final String SQL_GET_ALL = "select * from StudentDB.StudentRecord";         
+	private static final String SQL_GET_WITH_ID = "select * from StudentDB.StudentRecord where Id=?";
+	private static final String SQL_INSERT = "insert into StudentDB.StudentRecord (FirstName, LastName, DateOfBirth, EmailAddress, Midterm1, Midterm2, Assignment1, Assignment2, Assignment3, Assignment4, Assignment5, FinalScore, FinalGrade) values (?,?,?,?,?,?,?,?,?,?,?,?,?);";
+	private static final String SQL_UPDATE = "update StudentDB.StudentRecord set ? = ?  where Id=?";
+	private static final String SQL_DELETE = "delete from StudentDB.StudentRecord where Id=?";
 	
 	@Override
 	public List<Student> getAll() {
@@ -31,10 +30,10 @@ public class StudentDALImp implements StudentDAL {
 
 			while( result.next()){
 				list.add( new Student(
-						result.getInt( "StudentID"),
+						result.getInt( "Id"),
 						result.getString( "FirstName"),
 						result.getString( "LastName"),
-						result.getString("DateofBirth"),
+						result.getString("DateOfBirth"),
 						result.getString("EmailAddress"),
 						result.getInt("Midterm1"),
 						result.getInt("Midterm2"),
@@ -63,10 +62,10 @@ public class StudentDALImp implements StudentDAL {
 
 				while( result.next()){
 					student = new Student(
-							result.getInt( "StudentID"),
+							result.getInt( "Id"),
 							result.getString( "FirstName"),
 							result.getString( "LastName"),
-							result.getString("DateofBirth"),
+							result.getString("DateOfBirth"),
 							result.getString("EmailAddress"),
 							result.getInt("Midterm1"),
 							result.getInt("Midterm2"),
@@ -90,64 +89,65 @@ public class StudentDALImp implements StudentDAL {
 	public boolean add(Student student) {
 		try( Connection con = DriverManager.getConnection( URL, USER, PASS);
 				PreparedStatement statement = con.prepareStatement( SQL_INSERT)){
-			
-			//database set id auto incremental, insert sql remove id. //zd 20210.12.01
-			statement.setString( 2, student.getFirstName());
-			statement.setString( 3, student.getLastName());
-			statement.setString( 4, student.getDob());
-			statement.setString( 5, student.getEmailAddress());
-			statement.setInt( 6, student.getMidterm1());
-			statement.setInt( 7, student.getMidterm2());
-			statement.setInt( 8, student.getAssignment1());
-			statement.setInt( 9, student.getAssignment2());
-			statement.setInt( 10, student.getAssignment3());
-			statement.setInt( 11, student.getAssignment4());
-			statement.setInt( 12, student.getAssignment5());
-			statement.setInt( 13, student.getFinalScore());
-			statement.setString( 14, student.getFinalGrade());
+			statement.setString( 1, student.getFirstName());
+			statement.setString( 2, student.getLastName());
+			statement.setString( 3, student.getDob());
+			statement.setString( 4, student.getEmailAddress());
+			statement.setInt( 5, student.getMidterm1());
+			statement.setInt( 6, student.getMidterm2());
+			statement.setInt( 7, student.getAssignment1());
+			statement.setInt( 8, student.getAssignment2());
+			statement.setInt( 9, student.getAssignment3());
+			statement.setInt( 10, student.getAssignment4());
+			statement.setInt( 11, student.getAssignment5());
+			statement.setInt( 12, student.getFinalScore());
+			statement.setString( 13, student.getFinalGrade());
 			return statement.executeUpdate()>=1;
 
 		}catch( SQLException e){
 			e.printStackTrace();
 		}
-		return ; //todo return if successful zd
+		return false;
 	}
 
 	@Override
-	//todo return if successful zd
-	public boolean updateStudent(Student student) {
+	public boolean updateStudent(int id, String column, String string) {
 		try( Connection con = DriverManager.getConnection( URL, USER, PASS);
 				PreparedStatement statement = con.prepareStatement( SQL_UPDATE)){
-			statement.setInt( 1, student.getId());
-			statement.setString( 2, student.getFirstName());
-			statement.setString( 3, student.getLastName());
-			statement.setString( 4, student.getDob());
-			statement.setString( 5, student.getEmailAddress());
-			statement.setInt( 6, student.getMidterm1());
-			statement.setInt( 7, student.getMidterm2());
-			statement.setInt( 8, student.getAssignment1());
-			statement.setInt( 9, student.getAssignment2());
-			statement.setInt( 10, student.getAssignment3());
-			statement.setInt( 11, student.getAssignment4());
-			statement.setInt( 12, student.getAssignment5());
-			statement.setInt( 13, student.getFinalScore());
-			statement.setString( 14, student.getFinalGrade());
-			statement.executeUpdate();
+			statement.setInt( 1, id);
+			statement.setString( 2, column);
+			statement.setString( 3, string);
+			return statement.executeUpdate()>=1;
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}		
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean updateStudent(int id, String column, int integer) {
+		try( Connection con = DriverManager.getConnection( URL, USER, PASS);
+				PreparedStatement statement = con.prepareStatement( SQL_UPDATE)){
+			statement.setInt( 1, id);
+			statement.setString( 2, column);
+			statement.setInt( 3, integer);
+			return statement.executeUpdate()>=1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 	@Override
-	//todo return if successful zd
 	public boolean deleteStudent(int id) {
 		try( Connection con = DriverManager.getConnection( URL, USER, PASS);
 				PreparedStatement statement = con.prepareStatement( SQL_DELETE)){
 			statement.setInt( 1, id);
-			statement.executeUpdate();
+			return statement.executeUpdate()>=1;
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}		
+		}
+		return false;
 	}
 
 }
