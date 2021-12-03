@@ -17,9 +17,14 @@ public class StudentDALImp implements StudentDAL {
 	
 	private static final String SQL_GET_ALL = "select * from StudentDB.StudentRecord";         
 	private static final String SQL_GET_WITH_ID = "select * from StudentDB.StudentRecord where Id=?";
-	private static final String SQL_INSERT = "insert into StudentDB.StudentRecord (FirstName, LastName, DateOfBirth, EmailAddress, Midterm1, Midterm2, Assignment1, Assignment2, Assignment3, Assignment4, Assignment5, FinalScore, FinalGrade) values (?,?,?,?,?,?,?,?,?,?,?,?,?);";
+	private static final String SQL_INSERT = "insert into StudentDB.StudentRecord (FirstName, LastName, DateOfBirth, EmailAddress, Midterm1, Midterm2, "
+			+ "Assignment1, Assignment2, Assignment3, Assignment4, Assignment5, FinalScore, FinalGrade) values (?,?,?,?,?,?,?,?,?,?,?,?,?);";
 	private static final String SQL_UPDATE = "update StudentDB.StudentRecord set ? = ?  where Id=?";
 	private static final String SQL_DELETE = "delete from StudentDB.StudentRecord where Id=?";
+	private static final String SQL_UPDATE_ROW = "	update StudentDB.StudentRecord set FirstName=?,LastName=?, DateOfBirth=?, EmailAddress=?, "
+			+ "			Midterm1=?, Midterm2=?, Assignment1=?, Assignment2=?, "
+			+ "			Assignment3=?, Assignment4=?, Assignment5=?, FinalScore=?, FinalGrade=?  where Id=?";
+
 	
 	@Override
 	public List<Student> getAll() {
@@ -148,6 +153,32 @@ public class StudentDALImp implements StudentDAL {
 			e.printStackTrace();
 		}
 		return false;
+	}
+
+	@Override
+	public boolean updateStudent(Student updateStudent) {
+		try( Connection con = DriverManager.getConnection( URL, USER, PASS);
+				PreparedStatement statement = con.prepareStatement( SQL_UPDATE_ROW)){
+			statement.setString( 1, updateStudent.getFirstName());
+			statement.setString( 2, updateStudent.getLastName());
+			statement.setString( 3, updateStudent.getDob());
+			statement.setString( 4, updateStudent.getEmailAddress());
+			statement.setInt( 5, updateStudent.getMidterm1());
+			statement.setInt( 6, updateStudent.getMidterm2());
+			statement.setInt( 7, updateStudent.getAssignment1());
+			statement.setInt( 8, updateStudent.getAssignment2());
+			statement.setInt( 9, updateStudent.getAssignment3());
+			statement.setInt( 10, updateStudent.getAssignment4());
+			statement.setInt( 11, updateStudent.getAssignment5());
+			statement.setInt( 12, updateStudent.getFinalScore());
+			statement.setString( 13, updateStudent.getFinalGrade());
+			statement.setInt( 14, updateStudent.getId());
+			return statement.executeUpdate()>=1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+		
 	}
 
 }

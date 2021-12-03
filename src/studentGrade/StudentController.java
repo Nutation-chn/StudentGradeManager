@@ -31,7 +31,7 @@ public class StudentController {
 				deletionSuccessful = true;
 			}
 		}
-		if (deletionSuccessful) {
+		if (!deletionSuccessful) {
 			System.out.println("Student not found, please check if the id is correct.");
 		}
 
@@ -53,6 +53,9 @@ public class StudentController {
 				System.out.println(student);
 			}
 		}
+		if(studentList.size()==0) {
+			System.out.println("No student record in the database.");
+		}
 	}
 
 	public void updateStudent() {
@@ -64,15 +67,15 @@ public class StudentController {
 		Student updateStudent;
 		if((updateStudent= studentDAL.getStudent(updateStudentId))!=null) {
 			inputString = getStringInput(String.format(msg, "first name"));
-			if (inputString!=""){
+			if (!inputString.equals("")){
 				updateStudent.setFirstName(inputString);
 			}
 			inputString = getStringInput(String.format(msg, "last name"));
-			if (inputString!=""){
+			if (!inputString.equals("")){
 				updateStudent.setLastName(inputString);
 			}
 			inputString = getStringDobUpdate();
-			if (inputString!=""){
+			if (!inputString.equals("")){
 				updateStudent.setDob(inputString);
 			}
 			updateStudent.setEmailAddress(generateEmail(updateStudent.getFirstName(),
@@ -109,6 +112,7 @@ public class StudentController {
 					updateStudent.getAssignment1(),updateStudent.getAssignment2(),updateStudent.getAssignment3(),
 					updateStudent.getAssignment4(),updateStudent.getAssignment5())); 
 			updateStudent.setFinalGrade(calculateFinalGrade(updateStudent.getFinalScore()));
+			studentDAL.updateStudent(updateStudent);
 		}else {
 			System.out.println("Student not found, please check if the id is correct.");
 		}
@@ -160,14 +164,14 @@ public class StudentController {
 				}
 
 				if (student.getMidterm2() > averageMid2) {
-					mid1AboveAveCount++;
+					mid2AboveAveCount++;
 				} else if (student.getMidterm2() < averageMid2) {
-					mid1BelowAveCount++;
+					mid2BelowAveCount++;
 				}
 
 				if (student.getAssignment1() > averageA1) {
 					A1AboveAveCount++;
-				} else if (student.getAssignment2() < averageA1) {
+				} else if (student.getAssignment1() < averageA1) {
 					A1BelowAveCount++;
 				}
 
@@ -241,7 +245,7 @@ public class StudentController {
 
 	private int calculateFinalScore(int mid1, int mid2, int a1, int a2, int a3, int a4, int a5) {
 
-		return (int) (mid1 * 0.25 + mid2 * 0.25 + a1 * 0.1 + a2 * 0.1 + a3 * 0.1 + a4 * 0.1 + a5 * 0.1);// todo is score
+		return (int) (mid1 * 0.25 + mid2 * 0.25 + a1 * 0.1 + a2 * 0.1+ a3 * 0.1 + a4 * 0.1 + a5 * 0.1);// todo is score
 																										// integer?
 	}
 
@@ -250,25 +254,25 @@ public class StudentController {
 			return "A+";
 		} else if (finalScore > 84) {
 			return "A";
-		} else if (finalScore > 84) {
-			return "A-";
 		} else if (finalScore > 79) {
-			return "B+";
+			return "A-";
 		} else if (finalScore > 76) {
-			return "B";
+			return "B+";
 		} else if (finalScore > 72) {
-			return "B-";
+			return "B";
 		} else if (finalScore > 69) {
-			return "C+";
+			return "B-";
 		} else if (finalScore > 66) {
-			return "C";
+			return "C+";
 		} else if (finalScore > 62) {
-			return "C-";
+			return "C";
 		} else if (finalScore > 59) {
-			return "D+";
+			return "C-";
 		} else if (finalScore > 56) {
-			return "D";
+			return "D+";
 		} else if (finalScore > 52) {
+			return "D";
+		} else if (finalScore > 49) {
 			return "D-";
 		} else {
 			return "F";
@@ -310,10 +314,11 @@ public class StudentController {
 			try {
 				System.out.println("Please input date of birth, format yyyy-mm-dd (press Enter key to skip):");
 				input = scanner.nextLine();
-				if (input=="") {
-					return "";
+				if (input.length()==0) {//input==""
+             			return "";
 				}
 				Date date1 = new SimpleDateFormat("yyyy-mm-dd").parse(input);
+				inputValid = true;
 			} catch (Exception e) {
 				System.out.println("invalid input, please try again.");
 			}
@@ -330,7 +335,7 @@ public class StudentController {
 			try {
 				System.out.println("Please input " + message + ":");
 				input = scanner.nextLine();
-				if (input=="") {
+				if (input.equals("")) {
 					return 0;
 				}
 				result = Integer.parseInt(input);
@@ -353,10 +358,11 @@ public class StudentController {
 			try {
 				System.out.println("Please input " + message + ":");
 				input = scanner.nextLine();
-				if (input=="") {
+				if (input.equals("")) {
 					return -1;
 				}
 				result = Integer.parseInt(input);
+				inputValid=true;
 			} catch (Exception e) {
 				System.out.println("invalid input, please try again.");
 			}
