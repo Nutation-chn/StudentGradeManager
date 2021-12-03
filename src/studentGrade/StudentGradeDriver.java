@@ -37,7 +37,8 @@ public class StudentGradeDriver {
 	 * @return option int for user to input
 	 */
 	private int displayMenu() {
-		System.out.printf("%s\n\n %s\n %s\n %s\n %s\n %s\n %s\n %s\n\n", 
+		System.out.println("\n\n**********************************************************************************************");
+		System.out.printf("%s\n\n           %s\n           %s\n           %s\n           %s\n           %s\n           %s\n           %s\n\n", 
 				"Hi professor, please choose an operation: ", 
 				APP_ADD_STU + ". Add a new student",
 				APP_FIND_STU + ". Find a student by ID",
