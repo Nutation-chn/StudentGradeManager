@@ -27,7 +27,12 @@ public class StudentGradeDriver {
 		do {   //loop until '7' entered by user
 			option = displayMenu();
 			input.nextLine();
+			if (option!=-1) {
             executeMenuItem(option);
+			}
+			else {
+				System.out.println("Invalid input. Please try again");
+			}
 	       }while ( option != APP_EXIT) ;
 	    System.out.println("Exit program");	
 	}
@@ -47,8 +52,10 @@ public class StudentGradeDriver {
 	    	    APP_REMOVE_STU + ". Remove student by ID",
 	    	    APP_SHOW_STATISTICS + ". Show class' statistics",
 	    	    APP_EXIT + ". Exit program");
+		if (input.hasNextInt()) {
 		return(input.nextInt());
-		
+		}
+		else return -1;
 	}
 	
 	/**
@@ -80,7 +87,7 @@ public class StudentGradeDriver {
 			System.out.println("Good Bye!");
 			break;
 		default:
-			System.out.println("Invalid input");
+			System.out.println("Invalid input. Please try again");
 			System.out.println();
 	}
 		
