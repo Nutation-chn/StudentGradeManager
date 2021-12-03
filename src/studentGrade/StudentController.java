@@ -80,31 +80,31 @@ public class StudentController {
 			}
 			updateStudent.setEmailAddress(generateEmail(updateStudent.getFirstName(),
 					updateStudent.getLastName(),updateStudent.getDob()));
-			inputInt = getIntInputToUpdate(String.format(msg, "midterm1"));
+			inputInt = getIntScoreToUpdate(String.format(msg, "midterm1"));
 			if (inputInt!=-1){
 				updateStudent.setMidterm1(inputInt);
 			}
-			inputInt = getIntInputToUpdate(String.format(msg, "midterm2"));
+			inputInt = getIntScoreToUpdate(String.format(msg, "midterm2"));
 			if (inputInt!=-1){
 				updateStudent.setMidterm2(inputInt);
 			}
-			inputInt = getIntInputToUpdate(String.format(msg, "Assignment1"));
+			inputInt = getIntScoreToUpdate(String.format(msg, "Assignment1"));
 			if (inputInt!=-1){
 				updateStudent.setAssignment1(inputInt);
 			}
-			inputInt = getIntInputToUpdate(String.format(msg, "Assignment2"));
+			inputInt = getIntScoreToUpdate(String.format(msg, "Assignment2"));
 			if (inputInt!=-1){
 				updateStudent.setAssignment2(inputInt);
 			}	
-			inputInt = getIntInputToUpdate(String.format(msg, "Assignment3"));
+			inputInt = getIntScoreToUpdate(String.format(msg, "Assignment3"));
 			if (inputInt!=-1){
 				updateStudent.setAssignment3(inputInt);
 			}	
-			inputInt = getIntInputToUpdate(String.format(msg, "Assignment4"));
+			inputInt = getIntScoreToUpdate(String.format(msg, "Assignment4"));
 			if (inputInt!=-1){
 				updateStudent.setAssignment4(inputInt);
 			}	
-			inputInt = getIntInputToUpdate(String.format(msg, "Assignment5"));
+			inputInt = getIntScoreToUpdate(String.format(msg, "Assignment5"));
 			if (inputInt!=-1){
 				updateStudent.setAssignment5(inputInt);
 			}	
@@ -112,7 +112,11 @@ public class StudentController {
 					updateStudent.getAssignment1(),updateStudent.getAssignment2(),updateStudent.getAssignment3(),
 					updateStudent.getAssignment4(),updateStudent.getAssignment5())); 
 			updateStudent.setFinalGrade(calculateFinalGrade(updateStudent.getFinalScore()));
-			studentDAL.updateStudent(updateStudent);
+			if(studentDAL.updateStudent(updateStudent)) {
+					System.out.println("Data updated successfully.");				
+			}else {
+				System.out.println("Data update failure.");
+			}
 		}else {
 			System.out.println("Student not found, please check if the id is correct.");
 		}
@@ -230,13 +234,13 @@ public class StudentController {
 				.setLastName(ln = getStringInput("last name"))
 				.setDOB(dob = getStringDob())
 				.setEmailAddress(generateEmail(fn, ln, dob))
-				.setMidterm1(mid1 = getIntInput("midterm 1"))
-				.setMidterm2(mid2 = getIntInput("midterm 2"))
-				.setAssignment1(a1 = getIntInput("assignment 1"))
-				.setAssignment2(a2 = getIntInput("assignment 2"))
-				.setAssignment3(a3 = getIntInput("assignment 3"))
-				.setAssignment4(a4 = getIntInput("assignment 4"))
-				.setAssignment5(a5 = getIntInput("assignment 5"))
+				.setMidterm1(mid1 = getIntScore("midterm 1"))
+				.setMidterm2(mid2 = getIntScore("midterm 2"))
+				.setAssignment1(a1 = getIntScore("assignment 1"))
+				.setAssignment2(a2 = getIntScore("assignment 2"))
+				.setAssignment3(a3 = getIntScore("assignment 3"))
+				.setAssignment4(a4 = getIntScore("assignment 4"))
+				.setAssignment5(a5 = getIntScore("assignment 5"))
 				.setFinalScore(finalScore = calculateFinalScore(mid1, mid2, a1, a2, a3, a4, a5))
 				.setFinalGrade(calculateFinalGrade(finalScore))
 				.build();
@@ -326,6 +330,32 @@ public class StudentController {
 		return input;
 	}
 	// ask user to input a int value
+	private int getIntScore(String message) {
+		int result = -1;
+		boolean inputValid = false;
+
+		String input;
+		while (inputValid == false) {
+			try {
+				System.out.println("Please input " + message + "(between 0 and 100):");
+				input = scanner.nextLine();
+				if (input.equals("")) {
+					return 0;
+				}
+				result = Integer.parseInt(input);
+				if (result>=0&&result<=100) {
+					inputValid=true;
+				}else {
+					System.out.println("Invalid input, try again.");
+				}
+			} catch (Exception e) {
+				System.out.println("invalid input, please try again.");
+			}
+		}
+		return result;
+	}
+	
+	// ask user to input a int value
 	private int getIntInput(String message) {
 		int result = -1;
 		boolean inputValid = false;
@@ -347,22 +377,28 @@ public class StudentController {
 		return result;
 	}
 	
+	
 
 	// ask user to input a int value
-	private int getIntInputToUpdate(String message) {
+	private int getIntScoreToUpdate(String message) {
 		int result = -1;
 		boolean inputValid = false;
 
 		String input;
 		while (inputValid == false) {
 			try {
-				System.out.println("Please input " + message + ":");
+				System.out.println("Please input " + message + "(between 0 and 100):");
 				input = scanner.nextLine();
 				if (input.equals("")) {
 					return -1;
 				}
 				result = Integer.parseInt(input);
-				inputValid=true;
+				if (result>=0&&result<=100) {
+					inputValid=true;
+				}else {
+					System.out.println("Invalid input, try again.");
+				}
+				
 			} catch (Exception e) {
 				System.out.println("invalid input, please try again.");
 			}
