@@ -241,7 +241,7 @@ public class StudentController {
 
 	private int calculateFinalScore(int mid1, int mid2, int a1, int a2, int a3, int a4, int a5) {
 
-		return (int) (mid1 * 0.25 + mid2 * 0.25 + a1 * 0.1 + a2 * 0.1 * a3 * 0.1 + a4 * 0.1 + a5 * 0.1);// todo is score
+		return (int) (mid1 * 0.25 + mid2 * 0.25 + a1 * 0.1 + a2 * 0.1+ a3 * 0.1 + a4 * 0.1 + a5 * 0.1);// todo is score
 																										// integer?
 	}
 
@@ -250,25 +250,25 @@ public class StudentController {
 			return "A+";
 		} else if (finalScore > 84) {
 			return "A";
-		} else if (finalScore > 84) {
-			return "A-";
 		} else if (finalScore > 79) {
-			return "B+";
+			return "A-";
 		} else if (finalScore > 76) {
-			return "B";
+			return "B+";
 		} else if (finalScore > 72) {
-			return "B-";
+			return "B";
 		} else if (finalScore > 69) {
-			return "C+";
+			return "B-";
 		} else if (finalScore > 66) {
-			return "C";
+			return "C+";
 		} else if (finalScore > 62) {
-			return "C-";
+			return "C";
 		} else if (finalScore > 59) {
-			return "D+";
+			return "C-";
 		} else if (finalScore > 56) {
-			return "D";
+			return "D+";
 		} else if (finalScore > 52) {
+			return "D";
+		} else if (finalScore > 49) {
 			return "D-";
 		} else {
 			return "F";
