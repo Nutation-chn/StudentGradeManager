@@ -204,6 +204,7 @@ public class StudentController {
 			System.out.println("Please input "+message+":");
 			input =  scanner.nextLine();
 			result=Integer.parseInt(input);
+			inputValid = true;
 		}catch(Exception e) {
 			System.out.println("invalid input, please try again.");
 		}

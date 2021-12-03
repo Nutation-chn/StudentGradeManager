@@ -271,7 +271,21 @@ public class Student {
 	
 	@Override
 	public String toString() {
-		return "";
+    	String student = String.format ("%s\n %s\n %s\n %s\n %s\n %s\n %s\n %s\n %s\n %s\n %s\n %s\n %s\n\n", 
+				 " *********** Student ID:    " + getId(), 
+				 "*********** Student name:  " + getFirstName()+ " " + getLastName(),
+				 "*********** Date of birth: " + getDob(),
+				 "*********** Email:         " + getEmailAddress(),
+				 "*********** Midterm 1:     " + getMidterm1(),
+				 "*********** Midterm 2:     " + getMidterm2(),
+				 "*********** Assignment 1:  " + getAssignment1(),
+				 "*********** Assignment 2:  " + getAssignment2(),
+				 "*********** Assignment 3:  " + getAssignment3(),
+				 "*********** Assignment 4:  " + getAssignment4(),
+				 "*********** Assignment 5:  " + getAssignment5(),
+				 "*********** Final Score:   " + getFinalScore(),
+				 "*********** Final Grade:   " + getFinalGrade());
+    	return student;
 	}	
 }
 
