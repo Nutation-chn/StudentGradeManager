@@ -13,7 +13,7 @@ public class StudentController {
 
 	public void addStudent() {
 		System.out.println("Start to add new student information:");
-		if (!studentDAL.add(userInputStudent())) {
+		if (studentDAL.add(userInputStudent())) {
 			System.out.println("Data add successfully.");
 		} else {
 			System.out.println("Data add failure.");
@@ -277,7 +277,7 @@ public class StudentController {
 	}
 
 	private String generateEmail(String fn, String ln, String dob) {
-		String[] dateSplit = dob.split("/");
+		String[] dateSplit = dob.split("-");
 		return fn + dateSplit[2] + ln + "@algomail.com";
 	}
 
@@ -292,9 +292,10 @@ public class StudentController {
 		String input = "";
 		while (inputValid == false) {
 			try {
-				System.out.println("Please input date of birth(format dd/mm/yyyy):");
+				System.out.println("Please input date of birth(format yyyy-mm-dd):");
 				input = scanner.nextLine();
-				Date date1 = new SimpleDateFormat("dd/MM/yyyy").parse(input);
+				Date date1 = new SimpleDateFormat("yyyy-mm-dd").parse(input);
+				inputValid = true;
 			} catch (Exception e) {
 				System.out.println("invalid input, please try again.");
 			}
@@ -307,12 +308,12 @@ public class StudentController {
 		String input = "";
 		while (inputValid == false) {
 			try {
-				System.out.println("Please input date of birth, format dd/mm/yyyy (press Enter key to skip):");
+				System.out.println("Please input date of birth, format yyyy-mm-dd (press Enter key to skip):");
 				input = scanner.nextLine();
 				if (input=="") {
 					return "";
 				}
-				Date date1 = new SimpleDateFormat("dd/MM/yyyy").parse(input);
+				Date date1 = new SimpleDateFormat("yyyy-mm-dd").parse(input);
 			} catch (Exception e) {
 				System.out.println("invalid input, please try again.");
 			}
