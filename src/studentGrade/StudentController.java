@@ -333,6 +333,7 @@ public class StudentController {
 					return 0;
 				}
 				result = Integer.parseInt(input);
+				inputValid = true;
 			} catch (Exception e) {
 				System.out.println("invalid input, please try again.");
 			}
