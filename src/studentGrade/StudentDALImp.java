@@ -16,10 +16,10 @@ public class StudentDALImp implements StudentDAL {
 	private static final String PASS = "8288";
 	
 	private static final String SQL_GET_ALL = "select * from StudentDB.StudentRecord";         
-	private static final String SQL_GET_WITH_ID = "select * from StudentDB.StudentRecord where ID=?";
+	private static final String SQL_GET_WITH_ID = "select * from StudentDB.StudentRecord where Id=?";
 	private static final String SQL_INSERT = "insert into StudentDB.StudentRecord (FirstName, LastName, DateOfBirth, EmailAddress, Midterm1, Midterm2, Assignment1, Assignment2, Assignment3, Assignment4, Assignment5, FinalScore, FinalGrade) values (?,?,?,?,?,?,?,?,?,?,?,?,?);";
-	private static final String SQL_UPDATE = "update StudentDB.StudentRecord set ? = ?  where id=?";
-	private static final String SQL_DELETE = "delete from StudentDB.StudentRecord where id=?";
+	private static final String SQL_UPDATE = "update StudentDB.StudentRecord set ? = ?  where Id=?";
+	private static final String SQL_DELETE = "delete from StudentDB.StudentRecord where Id=?";
 	
 	@Override
 	public List<Student> getAll() {
@@ -30,7 +30,7 @@ public class StudentDALImp implements StudentDAL {
 
 			while( result.next()){
 				list.add( new Student(
-						result.getInt( "StudentID"),
+						result.getInt( "Id"),
 						result.getString( "FirstName"),
 						result.getString( "LastName"),
 						result.getString("DateOfBirth"),
@@ -62,7 +62,7 @@ public class StudentDALImp implements StudentDAL {
 
 				while( result.next()){
 					student = new Student(
-							result.getInt( "StudentID"),
+							result.getInt( "Id"),
 							result.getString( "FirstName"),
 							result.getString( "LastName"),
 							result.getString("DateOfBirth"),

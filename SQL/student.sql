@@ -17,7 +17,7 @@ GRANT ALL ON `StudentDB`.* TO 'cst8288'@'localhost';
 -- Table `StudentDB`.`StudentRecord`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `StudentDB`.`StudentRecord` (
-  `StudentID` INT NOT NULL auto_increment,
+  `Id` INT NOT NULL auto_increment,
   `FirstName` NVARCHAR(100) NOT NULL,
   `LastName` NVARCHAR(100) NOT NULL,
   `DateOfBirth` DATE NOT NULL,
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `StudentDB`.`StudentRecord` (
   `Assignment5` INT,
   `FinalScore` INT,
   `FinalGrade` NVARCHAR(2),
-  PRIMARY KEY (`ID`))
+  PRIMARY KEY (`Id`))
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
