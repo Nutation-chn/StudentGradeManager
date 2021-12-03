@@ -241,7 +241,7 @@ public class StudentController {
 
 	private int calculateFinalScore(int mid1, int mid2, int a1, int a2, int a3, int a4, int a5) {
 
-		return (int) (mid1 * 0.25 + mid2 * 0.25 + a1 * 0.1 + a2 * 0.1 * a3 * 0.1 + a4 * 0.1 + a5 * 0.1);// todo is score
+		return (int) (mid1 * 0.25 + mid2 * 0.25 + a1 * 0.1 + a2 * 0.1 + a3 * 0.1 + a4 * 0.1 + a5 * 0.1);// todo is score
 																										// integer?
 	}
 
