@@ -1,14 +1,30 @@
 package studentGrade;
 
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * this class is the controller handles all the user requests
+ * @author Dong Zhang
+ * 
+ */
+
 public class StudentController {
 
+	/**
+	 * Factory to create DAL
+	 */
 	private StudentDALFactory studentDALFactory = new StudentDALFactory();
+	/**
+	 * DAL that handles database requests.
+	 */
 	private StudentDAL studentDAL = studentDALFactory.getStudentDAL("jdbc");
+	/**
+	 * scanner to get user input
+	 */
 	private Scanner scanner = new Scanner(System.in);
 
 	public void addStudent() {
@@ -20,6 +36,9 @@ public class StudentController {
 		}
 	}
 
+	/**
+	 * delete student information of give student id
+	 */
 	public void deleteStudent() {
 		int id;
 		Student deleteStudent;
@@ -37,6 +56,9 @@ public class StudentController {
 
 	}
 
+	/**
+	 * get student information of give student id
+	 */
 	public void getStudentById() {
 		Student student = studentDAL.getStudent(getIntInput("student ID"));
 		if (student != null) {
@@ -46,6 +68,9 @@ public class StudentController {
 		}
 	}
 
+	/**
+	 * print information of all students
+	 */
 	public void getAll() {
 		List<Student> studentList = studentDAL.getAll();
 		if (studentList != null) {
@@ -58,6 +83,9 @@ public class StudentController {
 		}
 	}
 
+	/**
+	 * update information of student of given id, press enter to skip item.
+	 */
 	public void updateStudent() {
 	
 		String msg = "new %s (press Enter key to skip)";
@@ -123,6 +151,13 @@ public class StudentController {
 
 	}
 
+	/**
+	 * generate and print statistics
+	 * For each deliverable in the course (midterms & assignments), calculate the class's average score for that deliverable.
+	 * For each deliverable in the course (midterms & assignments), find out how many students scored above the class’s average, and how many students scored below that average.
+	 * For the Overall Final Score of the students, calculate the average Overall Final Score of the class and the highest and lowest Overall Final Score. Also, find out how many students passed (scored above 50) and how many failed the class.
+	 */
+	
 	public void getStatistics() {
 		List<Student> studentList = studentDAL.getAll();
 		int studentCount;
@@ -226,6 +261,9 @@ public class StudentController {
 
 	}
 
+	/**ask user to input information of a new student 
+	 * @return student information
+	 */
 	private Student userInputStudent() {
 		String fn, ln, dob;
 		int mid1, mid2, a1, a2, a3, a4, a5, finalScore;
@@ -247,12 +285,26 @@ public class StudentController {
 		return inputStudent;
 	}
 
+	/**calculate final score using mid term and assignment scores, mid term weight 25% each and assignment weight 10% each.
+	 * @param mid1: mid term 1 score
+	 * @param mid2: mid term 2 score
+	 * @param a1: assignment 1 score
+	 * @param a2: assignment 2 score
+	 * @param a3: assignment 3 score
+	 * @param a4: assignment 4 score
+	 * @param a5: assignment 5 score
+	 * @return final score
+	 */
 	private int calculateFinalScore(int mid1, int mid2, int a1, int a2, int a3, int a4, int a5) {
 
 		return (int) (mid1 * 0.25 + mid2 * 0.25 + a1 * 0.1 + a2 * 0.1+ a3 * 0.1 + a4 * 0.1 + a5 * 0.1);// todo is score
 																										// integer?
 	}
 
+	/** calculate letter final grade using final score (https://www.algonquincollege.com/policies/files/2017/06/AA14.pdf).
+	 * @param finalScore integer between 0 and 100
+	 * @return letter final grade 
+	 */
 	private String calculateFinalGrade(int finalScore) {
 		if (finalScore > 89) {
 			return "A+";
@@ -284,23 +336,39 @@ public class StudentController {
 
 	}
 
+	
+	/**this method generate Email address using following given strings
+	 * @param fn first name
+	 * @param ln last name
+	 * @param dob date of birth in the format of yyyy-mm-dd
+	 * @return Email address
+	 */
 	private String generateEmail(String fn, String ln, String dob) {
 		String[] dateSplit = dob.split("-");
 		return fn + dateSplit[2] + ln + "@algomail.com";
 	}
 
+	
+	/**this method ask user to input a string 
+	 * @param message name of the value user need to input
+	 * @return string input
+	 */
 	private String getStringInput(String message) {
-		System.out.println("Please input " + message+":");
+		System.out.print("Please input " + message+":");
 		return scanner.nextLine();
 	}
 
-	// ask user to input date of birth
+	/**this method ask user to input a string date of birth in the format of yyyy-mm-dd, 
+	 * it will continue looping until input is valid.
+	 * @param message name of the value user need to input
+	 * @return string date of birth in the format of yyyy-mm-dd
+	 */
 	private String getStringDob() {
 		boolean inputValid = false;
 		String input = "";
 		while (inputValid == false) {
 			try {
-				System.out.println("Please input date of birth(format yyyy-mm-dd):");
+				System.out.print("Please input date of birth(format yyyy-mm-dd):");
 				input = scanner.nextLine();
 				Date date1 = new SimpleDateFormat("yyyy-mm-dd").parse(input);
 				inputValid = true;
@@ -310,13 +378,18 @@ public class StudentController {
 		}
 		return input;
 	}
-	// ask user to input date of birth
+
+	/**this method ask user to input a string date of birth in the format of yyyy-mm-dd, 
+	 * it will continue looping until input is valid, press enter will return "" indicating skipping this input.
+	 * @param message name of the value user need to input
+	 * @return string date of birth in the format of yyyy-mm-dd or "" indicating skipping this input
+	 */
 	private String getStringDobUpdate() {
 		boolean inputValid = false;
 		String input = "";
 		while (inputValid == false) {
 			try {
-				System.out.println("Please input date of birth, format yyyy-mm-dd (press Enter key to skip):");
+				System.out.print("Please input date of birth, format yyyy-mm-dd (press Enter key to skip):");
 				input = scanner.nextLine();
 				if (input.length()==0) {//input==""
              			return "";
@@ -329,7 +402,13 @@ public class StudentController {
 		}
 		return input;
 	}
-	// ask user to input a int value
+
+
+	/**this method ask user to input a score of integer format between 0 and 100, 
+	 * it will continue looping until input is valid.
+	 * @param message name of the value user need to input
+	 * @return score between 1 and 100
+	 */
 	private int getIntScore(String message) {
 		int result = -1;
 		boolean inputValid = false;
@@ -337,7 +416,7 @@ public class StudentController {
 		String input;
 		while (inputValid == false) {
 			try {
-				System.out.println("Please input " + message + "(between 0 and 100):");
+				System.out.print("Please input " + message + "(between 0 and 100):");
 				input = scanner.nextLine();
 				if (input.equals("")) {
 					return 0;
@@ -355,7 +434,12 @@ public class StudentController {
 		return result;
 	}
 	
-	// ask user to input a int value
+
+	/**this method ask user to input a score of integer format, 
+	 * it will continue looping until input is valid.
+	 * @param message name of the value user need to input
+	 * @return integer of input
+	 */
 	private int getIntInput(String message) {
 		int result = -1;
 		boolean inputValid = false;
@@ -363,7 +447,7 @@ public class StudentController {
 		String input;
 		while (inputValid == false) {
 			try {
-				System.out.println("Please input " + message + ":");
+				System.out.print("Please input " + message + ":");
 				input = scanner.nextLine();
 				if (input.equals("")) {
 					return 0;
@@ -379,7 +463,12 @@ public class StudentController {
 	
 	
 
-	// ask user to input a int value
+
+	/**this method ask user to input a score of integer format between 0 and 100, 
+	 * it will continue looping until input is valid, press enter will return -1 indicating skipping this input.
+	 * @param message name of the value user need to input
+	 * @return score between 1 and 100, or -1 indicating skipping this input.
+	 */
 	private int getIntScoreToUpdate(String message) {
 		int result = -1;
 		boolean inputValid = false;
