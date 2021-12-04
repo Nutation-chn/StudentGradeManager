@@ -286,18 +286,18 @@ public class StudentController {
 	}
 
 	/**calculate final score using mid term and assignment scores, mid term weight 25% each and assignment weight 10% each.
-	 * @param mid1: mid term 1 score
-	 * @param mid2: mid term 2 score
-	 * @param a1: assignment 1 score
-	 * @param a2: assignment 2 score
-	 * @param a3: assignment 3 score
-	 * @param a4: assignment 4 score
-	 * @param a5: assignment 5 score
+	 * @param midterm1: mid term 1 score
+	 * @param midterm2: mid term 2 score
+	 * @param assignment1: assignment 1 score
+	 * @param assignment2: assignment 2 score
+	 * @param assignment3: assignment 3 score
+	 * @param assignment4: assignment 4 score
+	 * @param assignment5: assignment 5 score
 	 * @return final score
 	 */
-	private int calculateFinalScore(int mid1, int mid2, int a1, int a2, int a3, int a4, int a5) {
+	private int calculateFinalScore(int midterm1, int midterm2, int assignment1, int assignment2, int assignment3, int assignment4, int assignment5) {
 
-		return (int) (mid1 * 0.25 + mid2 * 0.25 + a1 * 0.1 + a2 * 0.1+ a3 * 0.1 + a4 * 0.1 + a5 * 0.1);// todo is score
+		return (int) (midterm1 * 0.25 + midterm2 * 0.25 + assignment1 * 0.1 + assignment2 * 0.1+ assignment3 * 0.1 + assignment4 * 0.1 + assignment5 * 0.1);// todo is score
 																										// integer?
 	}
 
