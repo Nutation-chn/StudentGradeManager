@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 /**
  * this class is the controller handles all the user requests
- * @author Dong Zhang
+ * @author Dong Zhang, Jiasi Shen
  * 
  */
 
@@ -336,6 +336,7 @@ public class StudentController {
 
 	}
 
+	
 	
 	/**this method generate Email address using following given strings
 	 * @param fn first name
