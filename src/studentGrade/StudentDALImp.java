@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class StudentDALImp implements StudentDAL {
 	
-	private static final String URL = "jdbc:mysql://localhost:3306/StudentDB";
+	private static final String URL = "jdbc:mysql://localhost:3306/StudentDB?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 	private static final String USER = "cst8288";
 	private static final String PASS = "8288";
 	
