@@ -1,8 +1,9 @@
 package studentGrade;
 
 /**
+ * Class: Student
  * This class stores student information
- * @author Feng Chen
+ * @author Feng Chen, Dong Zhang, Jiasi Shen
  *
  */
 public class Student {
@@ -62,6 +63,7 @@ public class Student {
 	
 	/**
 	 *  Inner class: Builder
+	 *  Utilize Builder Pattern to modify student information more easily
 	 * @author Feng Chen
 	 *
 	 */

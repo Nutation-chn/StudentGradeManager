@@ -9,6 +9,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Class: StudentDALImp
+ * This class implements interface: StudentDAL
+ * @author Feng Chen, Dong Zhang, Jiasi Shen
+ *
+ */
 public class StudentDALImp implements StudentDAL {
 	
 	private static final String URL = "jdbc:mysql://localhost:3306/StudentDB";

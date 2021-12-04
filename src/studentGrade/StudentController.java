@@ -1,3 +1,10 @@
+/**
+* Course Name: CST8288_014
+* @Author: Dong Zhang, Feng Chen, Jessie Shen
+* Class Description: StudentGradeDriver. This class contains the main loop of the application to accept and process the user choices.
+* Date: Nov. 24, 2021
+*/
+
 package studentGrade;
 
 import java.text.SimpleDateFormat;
