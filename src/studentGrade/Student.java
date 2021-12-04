@@ -1,9 +1,8 @@
 package studentGrade;
 
 /**
- * Class: Student
  * This class stores student information
- * @author Feng Chen, Dong Zhang, Jiasi Shen
+ * @author Feng Chen
  *
  */
 public class Student {
@@ -25,7 +24,6 @@ public class Student {
 	private String finalGrade;
 	
 	// Constructors
-	
 	public Student(Builder builder) {
 		id = builder.id;
 		firstName = builder.firstName;
@@ -64,7 +62,6 @@ public class Student {
 	
 	/**
 	 *  Inner class: Builder
-	 *  Utilize Builder Pattern to modify student information more easily
 	 * @author Feng Chen
 	 *
 	 */
@@ -83,17 +80,12 @@ public class Student {
 		private int assignment5;
 		private int finalScore;
 		private String finalGrade;
-		
-		// Constructors
-		
 		public Builder() {
 			
 		}
 		public Builder(int id) {
 			this.id = id;
 		}
-		
-		// Setters
 		
 		public Builder setFirstName(String firstName) {
 			this.firstName = firstName;
@@ -160,13 +152,11 @@ public class Student {
 			return this;
 		}
 		
-		// Build new Student object
 		public Student build() {
 			return new Student(this);
 		}
 	}
-	
-	// Getters and setters
+
 	public int getId() {
 		return id;
 	}
