@@ -8,13 +8,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-
+/**
+*Course Name: CST8288_014
+*@Author: Dong Zhang, Feng Chen, Jiasi Shen
+*Class Description: implements interface: StudentDAL
+*Date: Dec.04.2021
+*/
 public class StudentDALImp implements StudentDAL {
 	
-	private static final String URL = "jdbc:mysql://localhost:3306/StudentDB";
+	private static final String URL = "jdbc:mysql://localhost:3306/StudentDB?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 	private static final String USER = "cst8288";
-	private static final String PASS = "8288";
-	
+	private static final String PASS = "8288";	
 	private static final String SQL_GET_ALL = "select * from StudentDB.StudentRecord";         
 	private static final String SQL_GET_WITH_ID = "select * from StudentDB.StudentRecord where Id=?";
 	private static final String SQL_INSERT = "insert into StudentDB.StudentRecord (FirstName, LastName, DateOfBirth, EmailAddress, Midterm1, Midterm2, "
@@ -26,6 +30,10 @@ public class StudentDALImp implements StudentDAL {
 			+ "			Assignment3=?, Assignment4=?, Assignment5=?, FinalScore=?, FinalGrade=?  where Id=?";
 
 	
+	/** this method get all students' information from database
+	 * 
+	 *@return List of Student contain all students' information
+	 */
 	@Override
 	public List<Student> getAll() {
 		List<Student> list = new ArrayList<Student>();
@@ -56,7 +64,11 @@ public class StudentDALImp implements StudentDAL {
 		}
 		return list;
 	}
-
+	
+	/**this method returns student's information of given student
+	 * @param id: student id
+	 *@return information of given student id, return null if student not found
+	 */
 	@Override
 	public Student getStudent(int id) {
 		Student student = null;
@@ -90,6 +102,10 @@ public class StudentDALImp implements StudentDAL {
 		return student;
 	}
 
+	/**this method add new student to database
+	 * @param Student object to add to database
+	 *@return true if add successfully, otherwise return false
+	 */
 	@Override
 	public boolean add(Student student) {
 		try( Connection con = DriverManager.getConnection( URL, USER, PASS);
@@ -115,6 +131,12 @@ public class StudentDALImp implements StudentDAL {
 		return false;
 	}
 
+	/**this method update student a string information of given student.
+	 * @param id student id to modify
+	 * @param column field name
+	 * @string new value of given field
+	 * @return true if update successfully, otherwise return false.
+	 */
 	@Override
 	public boolean updateStudent(int id, String column, String string) {
 		try( Connection con = DriverManager.getConnection( URL, USER, PASS);
@@ -129,6 +151,12 @@ public class StudentDALImp implements StudentDAL {
 		return false;
 	}
 	
+	/**this method update student a integer information of given student.
+	 * @param id student id to modify
+	 * @param column field name
+	 * @param string new value of given field
+	 * @return true if update successfully, otherwise return false.
+	 */
 	@Override
 	public boolean updateStudent(int id, String column, int integer) {
 		try( Connection con = DriverManager.getConnection( URL, USER, PASS);
@@ -142,19 +170,10 @@ public class StudentDALImp implements StudentDAL {
 		}
 		return false;
 	}
-
-	@Override
-	public boolean deleteStudent(int id) {
-		try( Connection con = DriverManager.getConnection( URL, USER, PASS);
-				PreparedStatement statement = con.prepareStatement( SQL_DELETE)){
-			statement.setInt( 1, id);
-			return statement.executeUpdate()>=1;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return false;
-	}
-
+	/**this method update all information of a given student.
+	 * @param updateStudent the new information of given student
+	 *@return true if update successfully, otherwise return false.
+	 */
 	@Override
 	public boolean updateStudent(Student updateStudent) {
 		try( Connection con = DriverManager.getConnection( URL, USER, PASS);
@@ -180,5 +199,22 @@ public class StudentDALImp implements StudentDAL {
 		return false;
 		
 	}
+	/**
+	 * @param id the student id to delete
+	 *@return true if delete successfully, otherwise return false
+	 */
+	@Override
+	public boolean deleteStudent(int id) {
+		try( Connection con = DriverManager.getConnection( URL, USER, PASS);
+				PreparedStatement statement = con.prepareStatement( SQL_DELETE)){
+			statement.setInt( 1, id);
+			return statement.executeUpdate()>=1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+
 
 }

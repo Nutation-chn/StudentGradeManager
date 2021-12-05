@@ -243,7 +243,7 @@ public class StudentController {
 					+ "\n%15s%15d%15d%15d%15d\n%15s%15d%15d%15d%15d\n%15s%15d%15d%15d%15d\n%15s%15d%15d%15d%15d\n%15s%15d%15d%15d%15d", 
 					"Deliverable","Average Score","Above","Below","At Average"
 					,"Midterm1",  averageMid1,mid1AboveAveCount,mid1BelowAveCount,studentCount-mid1AboveAveCount-mid1BelowAveCount
-					,"Midterm2",  averageMid2,mid2AboveAveCount,mid2BelowAveCount,studentCount-mid1AboveAveCount-mid2BelowAveCount
+					,"Midterm2",  averageMid2,mid2AboveAveCount,mid2BelowAveCount,studentCount-mid2AboveAveCount-mid2BelowAveCount
 					,"Assignment1",averageA1,A1AboveAveCount,A1BelowAveCount,studentCount-A1AboveAveCount-A1BelowAveCount
 					,"Assignment2",averageA2,A2AboveAveCount,A2BelowAveCount,studentCount-A2AboveAveCount-A2BelowAveCount
 					,"Assignment3",averageA3,A3AboveAveCount,A3BelowAveCount,studentCount-A3AboveAveCount-A3BelowAveCount

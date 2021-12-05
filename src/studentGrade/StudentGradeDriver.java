@@ -1,7 +1,7 @@
 package studentGrade;
 /**
 * Course Name: CST8288_014
-* @Author: Dong Zhang, Feng Chen, Jessie Shen
+* @Author:  Dong Zhang, Feng Chen, Jiasi Shen
 * Class Description: StudentGradeDriver. This class contains the main loop of the application to accept and process the user choices.
 * Date: Nov. 24, 2021
 */

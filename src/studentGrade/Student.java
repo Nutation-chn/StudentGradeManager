@@ -1,9 +1,26 @@
 package studentGrade;
 
 /**
+ * Class: Student
  * This class stores student information
- * @author Feng Chen
+ * @author Feng Chen, Dong Zhang, Jiasi Shen
  *
+ */
+/**
+ * @param id: student id, primary key of student object, auto increment in database
+ * @param firstName: student's first name 
+ * @param lastName: student's last name
+ * @param dob: student's date of birth
+ * @param emailAddress: student email address
+ * @param midterm1: student's midterm 1 score
+ * @param midterm2: student's midterm 2 score
+ * @param assignment1: student's assignment 1 score
+ * @param assignment2: student's assignment 2 score
+ * @param assignment3: student's assignment 3 score
+ * @param assignment4: student's assignment 4 score
+ * @param assignment5: student's assignment 5 score
+ * @param finalScore: student's final score
+ * @param finalGrade: student's final grade in letter format
  */
 public class Student {
 	
@@ -61,8 +78,8 @@ public class Student {
 	}
 	
 	/**
-	 *  Inner class: Builder
-	 * @author Feng Chen
+	 * Inner class: Builder
+	 *  Utilize Builder Pattern to modify student information more easily
 	 *
 	 */
 	public static class Builder{
